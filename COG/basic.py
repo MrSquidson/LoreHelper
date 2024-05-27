@@ -6,6 +6,7 @@ import datetime
 import time
 from discord.ext.commands import has_permissions, MissingPermissions
 import math
+import typing
 
 
 intents = discord.Intents.default()
@@ -13,7 +14,7 @@ intents.message_content = True
 intents.presences = True
 interaction = discord.Interaction
 
-startDate = 1711922400
+startDate = 1711929600
 
 async def floorToQuarter(number):
     return math.floor((number) * 100 / 25) 
@@ -47,13 +48,14 @@ class Moderation(commands.Cog):
     @app_commands.describe(
         year='Full year i.e. 1984 or 2024'
     )
-    async def loredate(self, interaction: discord.Interaction, day:int, month:int, year:int):
+    async def loredate(self, interaction: discord.Interaction, day:int, month:int, year: typing.Optional[int]):
         try:
             if month.isdigit():
                 month = int(month)
         except:
             pass
-
+        if year == None:
+            year = 2024
         try:
         # If month is a string, convert it to a number
             if isinstance(month, str):
@@ -61,19 +63,20 @@ class Moderation(commands.Cog):
         
         # Create a datetime object from the provided day, month, and year
             date = datetime.datetime(year, month, day)
+            print(date)
         
         # Convert the datetime object to a Unix timestamp
             unix_time = time.mktime(date.timetuple())
         except  ValueError as e:
             return f"Error: {e}"
 
-        if unix_time < startDate:
+        if unix_time < (startDate - (24*60*60)):
             await interaction.response.send_message("Dates before April 1st 2024 Fall outside the scope of AU")
 
-        cur_time = ((unix_time - startDate) / 86400) / 4
-        loreYear = math.floor(cur_time)
+        cur_time = (((unix_time - startDate) / 86400) / 4)
+        loreYear = math.floor(cur_time)+1
         seasons = ['Winter','Spring', 'Summer','Fall']
-        cur_season = await floorToQuarter(cur_time - loreYear) 
+        cur_season = await floorToQuarter(cur_time - loreYear) +1
         
         await interaction.response.send_message(f'{seasons[cur_season]} of {loreYear + 50} AU') 
 
