@@ -16,6 +16,10 @@ interaction = discord.Interaction
 
 startDate = 1711929600
 
+months = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"]
+
 async def floorToQuarter(number):
     return math.floor((number) * 100 / 25) 
 
@@ -48,12 +52,18 @@ class Moderation(commands.Cog):
     @app_commands.describe(
         year='Full year i.e. 1984 or 2024'
     )
-    async def loredate(self, interaction: discord.Interaction, day:int, month:int, year: typing.Optional[int]):
+    async def loredate(self, interaction: discord.Interaction, day: typing.Optional[int], month:typing.Optional[str], year: typing.Optional[int]):
         try:
             if month.isdigit():
                 month = int(month)
         except:
-            pass
+            if month in months:
+                month = months.index(month) + 1
+        if month == None:
+            month = datetime.datetime.today().month
+        if day == None:
+            day = datetime.datetime.today().day
+
         if year == None:
             year = 2024
         try:
