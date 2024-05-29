@@ -5,6 +5,7 @@ import datetime
 import time
 import math
 import typing
+from COG.botDatabase import Database
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -80,6 +81,26 @@ class Basic(commands.Cog):
         print(f'The Date {date} becomes \nUnix: {unix_time}\nLoreyear: {loreYear} with Season: {seasons[cur_season]}\n')
         # await interaction.response.send_message(f"cur_season = {cur_season}")
         await interaction.response.send_message(f'{seasons[cur_season]} of {loreYear} AU')
+
+
+    # Start of logEvent
+    @app_commands.command(
+        name="logevent",
+        description="Logs an Event to the event Database:tm:",
+    )
+    @app_commands.describe(
+        date="Lore Year something happened",
+        loreEvent="What happened in the year in question. If Season is important start by mentioning the season"
+    )
+    async def logEvent(interaction:discord.Interaction, date:int, loreEvent:str):
+
+        try:
+            Database.loreEvent(guildId=interaction.guild.id, date=date,loreEvent=loreEvent)
+
+        except ValueError as e:
+            await interaction.response.send_message(f"Error: {e}")
+            return
+
 
 async def setup(bot) -> None:
     await bot.add_cog(Basic(bot))
