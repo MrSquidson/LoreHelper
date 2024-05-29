@@ -83,7 +83,15 @@ class Basic(commands.Cog):
         await interaction.response.send_message(f'{seasons[cur_season]} of {loreYear} AU')
 
 
-    # Start of logEvent
+#       __  _                   ______                          _   
+#      / / | |                 |  ____|                        | |  
+#     / /  | |   ___     __ _  | |__    __   __   ___   _ __   | |_ 
+#    / /   | |  / _ \   / _` | |  __|   \ \ / /  / _ \ | '_ \  | __|
+#   / /    | | | (_) | | (_| | | |____   \ V /  |  __/ | | | | | |_ 
+#  /_/     |_|  \___/   \__, | |______|   \_/    \___| |_| |_|  \__|
+#                        __/ |                                      
+#                       |___/  
+
     @app_commands.command(
         name="logevent",
         description="Logs an Event to the event Database:tm:",
