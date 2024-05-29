@@ -399,4 +399,4 @@ FodyWeavers.xsd
 
 .env
 blank.py
-./DB/
+DB/*
