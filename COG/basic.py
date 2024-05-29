@@ -26,6 +26,16 @@ class Basic(commands.Cog):
     async def on_ready(self):
         print('Loaded??')
 
+
+
+#       __  _                         _____            _          
+#      / / | |                       |  __ \          | |         
+#     / /  | |   ___    _ __    ___  | |  | |   __ _  | |_    ___ 
+#    / /   | |  / _ \  | '__|  / _ \ | |  | |  / _` | | __|  / _ \
+#   / /    | | | (_) | | |    |  __/ | |__| | | (_| | | |_  |  __/
+#  /_/     |_|  \___/  |_|     \___| |_____/   \__,_|  \__|  \___|
+                                                        
+                                                        
     @app_commands.command(
         name="loredate",
         description="Calculate a loredate from a Date",
