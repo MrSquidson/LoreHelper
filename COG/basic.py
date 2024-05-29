@@ -89,13 +89,15 @@ class Basic(commands.Cog):
         description="Logs an Event to the event Database:tm:",
     )
     @app_commands.describe(
-        date="Lore Year something happened",
-        loreEvent="What happened in the year in question. If Season is important start by mentioning the season"
+        loredate="Lore Year something happened",
+        loreevent="What happened in the year in question. If Season is important start by mentioning the season",
     )
-    async def logEvent(interaction:discord.Interaction, date:int, loreEvent:str):
-
+    async def logevent(self, interaction:discord.Interaction, loredate:int, loreevent:str):
+        await interaction.response.send_message("Attempting to save lore event to database", ephemeral=True)
         try:
-            Database.loreEvent(guildId=interaction.guild.id, date=date,loreEvent=loreEvent)
+            await Database.loreEvent(guildID=interaction.guild.id, date=loredate, loreevent=loreevent)
+            await interaction.followup.send("Saved to database!")
+
 
         except ValueError as e:
             await interaction.response.send_message(f"Error: {e}")
