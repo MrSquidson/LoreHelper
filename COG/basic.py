@@ -18,7 +18,7 @@ months = [
     "July", "August", "September", "October", "November", "December"
 ]
 
-class Moderation(commands.Cog):
+class Basic(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
 
@@ -67,9 +67,9 @@ class Moderation(commands.Cog):
 
         seasons = ['Winter', 'Spring', 'Summer', 'Fall']
         
-        print(f'The Date {date} becomes \nUnix: {unix_time}\nLoreyear: {loreYear} with Season: {seasons[cur_season]}')
-        await interaction.response.send_message(f"cur_season = {cur_season}")
-        await interaction.followup.send(f'{seasons[cur_season]} of {loreYear} AU')
+        print(f'The Date {date} becomes \nUnix: {unix_time}\nLoreyear: {loreYear} with Season: {seasons[cur_season]}\n')
+        # await interaction.response.send_message(f"cur_season = {cur_season}")
+        await interaction.response.send_message(f'{seasons[cur_season]} of {loreYear} AU')
 
 async def setup(bot) -> None:
-    await bot.add_cog(Moderation(bot))
+    await bot.add_cog(Basic(bot))

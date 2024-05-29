@@ -43,7 +43,7 @@ async def sync(interaction: discord.Interaction):
                 print(f'Syncing {filename}...')
         try:
             synced = await bot.tree.sync()
-            print(f'Synced {i} cogs and {len(synced)} commands')
+            print(f'Synced {i} cogs and {len(synced)} commands\n')
         except Exception as e:
             print(e)
         await interaction.followup.send(f'Synced {i} cogs and {len(synced)} commands! :D', ephemeral=True)
@@ -81,7 +81,7 @@ async def on_ready():
     print(f'Logged on as {bot.user}!')
     try:
         synced = await bot.tree.sync()
-        print(f'Synced {len(synced)} commands!')
+        print(f'Synced {len(synced)} commands!\n')
     except Exception as e:
         print(e)
 
